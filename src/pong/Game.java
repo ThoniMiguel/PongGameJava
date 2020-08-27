@@ -51,6 +51,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
             return;
         }
         Graphics g = layer.getGraphics();
+        g.setColor(Color.black);
+        g.fillRect(0,0,WIDTH,HEIGHT);
         player.render(g);
 
         g = bs.getDrawGraphics();
@@ -62,6 +64,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 
     @Override
     public void run() {
+        requestFocus(); // foca a tela
         while(true){
             tick();
             render();
@@ -81,7 +84,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            System.out.println("opa");
             player.right = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -90,7 +92,13 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent keyEvent) {
-
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            System.out.println("opa");
+            player.right = false;
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            player.left = false;
+        }
     }
 }
